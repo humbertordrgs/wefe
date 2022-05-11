@@ -17,6 +17,7 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
     self.use_control_tokens = use_control_tokens
     self.name = name
     self.aggregation_method = self.aggregation_methods[aggregation]
+    self.vocab_prefix = None
   
   def get_word_tokens(self, word):
     res = self.tokenizer(word,return_tensors="pt")
