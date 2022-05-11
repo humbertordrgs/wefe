@@ -4,6 +4,7 @@ dependencies:
   - scipy
   - pandas
   - scikit-learn
+  - transformers
   - gensim
   - plotly
   - six

@@ -26,6 +26,7 @@ INSTALL_REQUIRES = [
     "numpy",
     "scipy",
     "scikit-learn",
+    "transformers",
     "pandas",
     "gensim",
     "plotly",
