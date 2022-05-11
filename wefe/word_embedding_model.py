@@ -4,6 +4,7 @@ from typing import Callable, Dict, Sequence, Union
 import gensim
 import numpy as np
 import semantic_version
+import WordEmbeddingBaseModel from word_embedding_base_model
 
 gensim_version = semantic_version.Version.coerce(gensim.__version__)
 if gensim_version.major >= 4:
@@ -16,7 +17,7 @@ EmbeddingDict = Dict[str, np.ndarray]
 EmbeddingSets = Dict[str, EmbeddingDict]
 
 
-class WordEmbeddingModel:
+class WordEmbeddingModel(WordEmbeddingBaseModel):
     """A wrapper for Word Embedding pre-trained models.
 
     It can hold gensim's KeyedVectors or gensim's api loaded models.

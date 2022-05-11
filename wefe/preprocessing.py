@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.feature_extraction.text import strip_accents_ascii, strip_accents_unicode
 
 from wefe.query import Query
-from wefe.word_embedding_model import WordEmbeddingModel
+from wefe.word_embedding_model import WordEmbeddingBaseModel
 
 EmbeddingDict = Dict[str, np.ndarray]
 EmbeddingSets = Dict[str, EmbeddingDict]
@@ -82,7 +82,7 @@ def preprocess_word(
 
 
 def get_embeddings_from_set(
-    model: WordEmbeddingModel,
+    model: WordEmbeddingBaseModel,
     word_set: Sequence[str],
     preprocessors: List[Dict[str, Union[str, bool, Callable]]] = [{}],
     strategy: str = "first",
@@ -97,7 +97,7 @@ def get_embeddings_from_set(
 
     Parameters
     ----------
-    model : WordEmbeddingModel
+    model : WordEmbeddingBaseModel
         A word embeddding model
 
     word_set : Sequence[str]
@@ -159,8 +159,8 @@ def get_embeddings_from_set(
     # ----------------------------------------------------------------------------------
     # type verifications.
 
-    if not isinstance(model, WordEmbeddingModel):
-        raise TypeError(f"model should be a WordEmbeddingModel instance, got {model}.")
+    if not isinstance(model, WordEmbeddingBaseModel):
+        raise TypeError(f"model should be a WordEmbeddingBaseModel instance, got {model}.")
 
     if not isinstance(word_set, (list, tuple, np.ndarray)):
         raise TypeError(
@@ -251,7 +251,7 @@ def _warn_not_found_words(
 
 
 def _check_lost_vocabulary_threshold(
-    model: WordEmbeddingModel,
+    model: WordEmbeddingBaseModel,
     embeddings: EmbeddingDict,
     word_set: List[str],
     word_set_name: str,
@@ -286,7 +286,7 @@ def _check_lost_vocabulary_threshold(
 
 
 def get_embeddings_from_sets(
-    model: WordEmbeddingModel,
+    model: WordEmbeddingBaseModel,
     sets: Sequence[Sequence[str]],
     sets_name: Union[str, None] = None,
     preprocessors: List[Dict[str, Union[str, bool, Callable]]] = [{}],
@@ -451,7 +451,7 @@ def get_embeddings_from_sets(
 
 
 def get_embeddings_from_query(
-    model: WordEmbeddingModel,
+    model: WordEmbeddingBaseModel,
     query: Query,
     lost_vocabulary_threshold: float = 0.2,
     preprocessors: List[Dict[str, Union[str, bool, Callable]]] = [{}],

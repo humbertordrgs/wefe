@@ -1,0 +1,34 @@
+import numpy as np
+import WordEmbeddingBaseModel from word_embedding_base_model
+
+class WordEmbeddingContextualModel():
+  aggregation_methods = {
+      "mean": np.mean,
+      "sum": np.sum
+  }
+  def __init__(
+    self, tokenizer, hugging_face_pretrained_model, use_control_tokens=True, name = None, aggregation="mean"):
+    if isinstance(hugging_face_pretrained_model,PreTrainedModel): 
+      self.wv = hugging_face_pretrained_model
+    if isinstance(tokenizer,PreTrainedTokenizerBase): 
+      self.tokenizer = tokenizer
+    
+    self.use_control_tokens = use_control_tokens
+    self.name = name
+    self.aggregation_method = self.aggregation_methods[aggregation]
+  
+  def get_word_tokens(self, word):
+    res = self.tokenizer(word,return_tensors="pt")
+    
+    if not self.use_control_tokens:
+      res["input_ids"] = res["input_ids"][None,0,1:-1]
+      res["token_type_ids"] = res["token_type_ids"][None,0,1:-1]
+      res["attention_mask"] = res["attention_mask"][None,0,1:-1]
+    return res
+
+  def __getitem__(self, word):
+    word_tokens = self.get_word_tokens(word)
+    return self.aggregation_method(
+      self.wv(**word_tokens)["last_hidden_state"].detach().numpy(),
+      axis=1
+    )[0]

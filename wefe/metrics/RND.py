@@ -6,7 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from wefe.metrics.base_metric import BaseMetric
 from wefe.preprocessing import get_embeddings_from_query
 from wefe.query import Query
-from wefe.word_embedding_model import WordEmbeddingModel
+from wefe.word_embedding_model import WordEmbeddingBaseModel
 
 
 class RND(BaseMetric):
@@ -85,7 +85,7 @@ class RND(BaseMetric):
     def run_query(
         self,
         query: Query,
-        model: WordEmbeddingModel,
+        model: WordEmbeddingBaseModel,
         distance: str = "norm",
         lost_vocabulary_threshold: float = 0.2,
         preprocessors: List[Dict[str, Union[str, bool, Callable]]] = [{}],
@@ -102,7 +102,7 @@ class RND(BaseMetric):
         query : Query
             A Query object that contains the target and attribute sets to be tested.
 
-        model : WordEmbeddingModel
+        model : WordEmbeddingBaseModel
             A word embedding model.
 
         distance : str, optional
