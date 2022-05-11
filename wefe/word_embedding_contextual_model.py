@@ -1,5 +1,6 @@
 import numpy as np
 from wefe.word_embedding_base_model import WordEmbeddingBaseModel
+from transformers import PreTrainedModel, PreTrainedTokenizerBase
 
 class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
   aggregation_methods = {
