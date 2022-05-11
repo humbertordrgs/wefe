@@ -18,7 +18,7 @@ from sklearn.utils.validation import check_is_fitted as _check_is_fitted
 
 from wefe.metrics.base_metric import BaseMetric
 from wefe.query import Query
-from wefe.word_embedding_model import WordEmbeddingModel
+from wefe.word_embedding_base_model import WordEmbeddingBaseModel
 
 
 def check_is_fitted(estimator, attributes):
@@ -102,7 +102,7 @@ def generate_subqueries_from_queries_list(
 def run_queries(
     metric: Type[BaseMetric],
     queries: List[Query],
-    models: List[WordEmbeddingModel],
+    models: List[WordEmbeddingBaseModel],
     queries_set_name: str = "Unnamed queries set",
     lost_vocabulary_threshold: float = 0.2,
     metric_params: dict = {},
@@ -201,9 +201,9 @@ def run_queries(
         )
 
     for idx, model in enumerate(models):
-        if model is None or not isinstance(model, WordEmbeddingModel):
+        if model is None or not isinstance(model, WordEmbeddingBaseModel):
             raise TypeError(
-                "item on index {} must be a WordEmbeddingModel instance. "
+                "item on index {} must be a WordEmbeddingBaseModel instance. "
                 "given: {}".format(idx, model)
             )
 
@@ -584,12 +584,12 @@ def plot_ranking_correlations(correlation_matrix, title=""):
     return fig
 
 
-def load_test_model() -> WordEmbeddingModel:
+def load_test_model() -> WordEmbeddingBaseModel:
     """Load a Word2vec subset to test metrics and debias methods.
 
     Returns
     -------
-    WordEmbeddingModel
+    WordEmbeddingBaseModel
         The loaded model
     """
     from gensim.models import KeyedVectors
@@ -601,7 +601,7 @@ def load_test_model() -> WordEmbeddingModel:
     weat_w2v_path = pkg_resources.resource_filename(resource_package, resource_path)
 
     test_model = KeyedVectors.load(weat_w2v_path)
-    return WordEmbeddingModel(test_model, "Test w2v model")
+    return WordEmbeddingBaseModel(test_model, "Test w2v model")
 
 
 def print_doc_table(df):
