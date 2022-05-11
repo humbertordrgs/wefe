@@ -22,6 +22,8 @@ from wefe.preprocessing import (
 )
 from wefe.query import Query
 from wefe.word_embedding_model import WordEmbeddingModel
+from wefe.word_embedding_base_model import WordEmbeddingBaseModel
+from wefe.word_embedding_contextual_model import WordEmbeddingContextualModel
 
 __all__ = [
     "",
