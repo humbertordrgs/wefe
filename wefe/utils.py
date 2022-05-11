@@ -12,8 +12,8 @@ from typing import Callable, Dict, List, Type, Union
 import numpy as np
 import pandas as pd
 import pkg_resources
-import plotly.express as px
-import plotly.graph_objects as go
+# import plotly.express as px
+# import plotly.graph_objects as go
 from sklearn.utils.validation import check_is_fitted as _check_is_fitted
 
 from wefe.metrics.base_metric import BaseMetric
