@@ -4,7 +4,7 @@ from typing import Callable, Dict, Sequence, Union
 import gensim
 import numpy as np
 import semantic_version
-from word_embedding_base_model import WordEmbeddingBaseModel 
+import WordEmbeddingBaseModel from wefe.word_embedding_base_model
 
 gensim_version = semantic_version.Version.coerce(gensim.__version__)
 if gensim_version.major >= 4:
