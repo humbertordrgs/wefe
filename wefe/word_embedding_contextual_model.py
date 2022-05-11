@@ -1,7 +1,7 @@
 import numpy as np
-import WordEmbeddingBaseModel from word_embedding_base_model
+from wefe.word_embedding_base_model import WordEmbeddingBaseModel
 
-class WordEmbeddingContextualModel():
+class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
   aggregation_methods = {
       "mean": np.mean,
       "sum": np.sum
