@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from wefe.metrics.base_metric import BaseMetric
 from wefe.preprocessing import get_embeddings_from_query
 from wefe.query import Query
-from wefe.word_embedding_model import EmbeddingDict, WordEmbeddingModel
+from wefe.word_embedding_model import EmbeddingDict, WordEmbeddingBaseModel
 
 
 class WEAT(BaseMetric):
@@ -170,7 +170,7 @@ class WEAT(BaseMetric):
     def run_query(
         self,
         query: Query,
-        model: WordEmbeddingModel,
+        model: WordEmbeddingBaseModel,
         return_effect_size: bool = False,
         calculate_p_value: bool = False,
         p_value_test_type: str = "right-sided",
@@ -192,7 +192,7 @@ class WEAT(BaseMetric):
         query : Query
             A Query object that contains the target and attribute sets to be tested.
 
-        model : WordEmbeddingModel
+        model : WordEmbeddingBaseModel
             A word embedding model.
 
         return_effect_size : bool, optional

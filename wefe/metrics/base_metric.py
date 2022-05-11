@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Callable, Dict, List, Tuple, Union
 
 from wefe.query import Query
-from wefe.word_embedding_model import WordEmbeddingModel
+from wefe.word_embedding_model import WordEmbeddingBaseModel
 
 
 class BaseMetric(ABC):
@@ -23,15 +23,15 @@ class BaseMetric(ABC):
     metric_short_name: str
 
     def _check_input(
-        self, query: Query, model: WordEmbeddingModel, locals: Dict[str, Any]
+        self, query: Query, model: WordEmbeddingBaseModel, locals: Dict[str, Any]
     ) -> None:
-        """Check if Query and WordEmbeddingModel parameters are valid.
+        """Check if Query and WordEmbeddingBaseModel parameters are valid.
 
         Parameters
         ----------
         query : Query
             The query that the method will execute.
-        model : WordEmbeddingModel
+        model : WordEmbeddingBaseModel
             A word embedding model.
 
         Raises
@@ -56,9 +56,9 @@ class BaseMetric(ABC):
             raise TypeError("query should be a Query instance, got {}".format(query))
 
         # check if the word_embedding is a instance of
-        if not isinstance(model, WordEmbeddingModel):
+        if not isinstance(model, WordEmbeddingBaseModel):
             raise TypeError(
-                "word_embedding should be a WordEmbeddingModel instance, "
+                "word_embedding should be a WordEmbeddingBaseModel instance, "
                 "got: {}".format(model)
             )
 
@@ -127,7 +127,7 @@ class BaseMetric(ABC):
     def run_query(
         self,
         query: Query,
-        model: WordEmbeddingModel,
+        model: WordEmbeddingBaseModel,
         lost_vocabulary_threshold: float = 0.2,
         preprocessors: List[Dict[str, Union[str, bool, Callable]]] = [{}],
         strategy: str = "first",
