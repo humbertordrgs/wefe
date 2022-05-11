@@ -28,7 +28,9 @@ from wefe.word_embedding_contextual_model import WordEmbeddingContextualModel
 __all__ = [
     "",
     "Query",
+    "WordEmbeddingBaseModel",
     "WordEmbeddingModel",
+    "WordEmbeddingContextualModel",
     "BaseMetric",
     "WEAT",
     "RND",
