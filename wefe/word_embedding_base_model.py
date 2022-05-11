@@ -1,3 +1,3 @@
 class WordEmbeddingBaseModel:
-    self.wv = None
-    self.name = ""
+    wv = None
+    name = ""
