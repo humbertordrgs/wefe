@@ -6,7 +6,7 @@ from wefe.datasets import (
     load_bingliu,
     load_weat,
 )
-from wefe.debias import HardDebias, MulticlassHardDebias
+# from wefe.debias import HardDebias, MulticlassHardDebias
 from wefe.metrics import WEAT
 from wefe.metrics.base_metric import BaseMetric
 from wefe.metrics.ECT import ECT
