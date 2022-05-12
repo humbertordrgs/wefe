@@ -44,6 +44,6 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
     # If use_cls is off then we aggregate
     if not self.use_cls:
       return self.aggregation_method(res,axis=1)[0]
-
-    print(res[0].shape)
-    return res[0]
+    
+    print(res[0][0].shape)
+    return res[0][0]
