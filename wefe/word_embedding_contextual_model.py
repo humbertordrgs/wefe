@@ -18,6 +18,7 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
     self.name = name
     self.aggregation_method = self.aggregation_methods[aggregation]
     self.vocab_prefix = None
+    print(self.aggregation_method)
   
   def get_word_tokens(self, word):
     res = self.tokenizer(word,return_tensors="pt")
@@ -35,6 +36,7 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
 
   def __getitem__(self, word):
     word_tokens = self.get_word_tokens(word)
+    
     return self.aggregation_method(
       self.wv(**word_tokens)["last_hidden_state"].detach().numpy(),
       axis=1
