@@ -20,8 +20,8 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
     self.vocab_prefix = None
   
   def get_word_tokens(self, word):
-    print(res)
     res = self.tokenizer(word,return_tensors="pt")
+    print(res)
     start_idx = 0 if self.use_cls else 1
     res.values.map(lambda x: x[None,0,start_idx:-1])
     print(res)
