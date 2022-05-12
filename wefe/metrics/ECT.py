@@ -7,7 +7,7 @@ from scipy.stats import spearmanr
 from wefe.metrics.base_metric import BaseMetric
 from wefe.preprocessing import get_embeddings_from_query
 from wefe.query import Query
-from wefe.word_embedding_base_model import WordEMbeddingBaseModel
+from wefe.word_embedding_model import WordEMbeddingBaseModel
 
 
 class ECT(BaseMetric):
