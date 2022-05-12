@@ -27,7 +27,7 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
     start_idx = 0 if self.use_cls else 1
 
     # Ignoring all the other vectors when use_cls is on
-    end_idx = 1 if self.use_cls else -1
+    end_idx = -1
 
     res["input_ids"] = res["input_ids"][None,0,start_idx:end_idx]
     res["token_type_ids"] = res["token_type_ids"][None,0,start_idx:end_idx]
@@ -39,11 +39,5 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
 
   def __getitem__(self, word):
     word_tokens = self.get_word_tokens(word)
-    
-    res = self.wv(**word_tokens)["last_hidden_state"].detach().numpy()
-    
-    # If use_cls is off then we aggregate
-    if not self.use_cls:
-      return self.aggregation_method(res,axis=1)[0]
-    
-    return res[0][0]
+    res = self.wv(**word_tokens)["last_hidden_state"].detach().numpy()   
+    return self.aggregation_method(res,axis=1)[0]
