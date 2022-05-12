@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from wefe.metrics.base_metric import BaseMetric
 from wefe.preprocessing import get_embeddings_from_query
 from wefe.query import Query
-from wefe.word_embedding_model import EmbeddingDict, WordEmbeddingBaseModel
+from wefe.word_embedding_base_model import EmbeddingDict, WordEmbeddingBaseModel
 
 
 class WEAT(BaseMetric):
