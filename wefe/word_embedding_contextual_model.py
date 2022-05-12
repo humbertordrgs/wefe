@@ -32,6 +32,7 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
     res["input_ids"] = res["input_ids"][None,0,start_idx:end_idx]
     res["token_type_ids"] = res["token_type_ids"][None,0,start_idx:end_idx]
     res["attention_mask"] = res["attention_mask"][None,0,start_idx:end_idx]
+
     return res
     
     
@@ -45,5 +46,4 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
     if not self.use_cls:
       return self.aggregation_method(res,axis=1)[0]
     
-    print(res[0][0].shape)
     return res[0][0]
