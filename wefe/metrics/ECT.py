@@ -43,7 +43,7 @@ class ECT(BaseMetric):
     def run_query(
         self,
         query: Query,
-        model: WordEMbeddingBaseModel,
+        model: WordEmbeddingBaseModel,
         lost_vocabulary_threshold: float = 0.2,
         preprocessors: List[Dict[str, Union[str, bool, Callable]]] = [{}],
         strategy: str = "first",
@@ -60,7 +60,7 @@ class ECT(BaseMetric):
             A Query object that contains the target and attribute word sets to be
             tested.
 
-        model : WordEMbeddingBaseModel
+        model : WordEmbeddingBaseModel
             A word embedding model.
 
         preprocessors : List[Dict[str, Union[str, bool, Callable]]]
