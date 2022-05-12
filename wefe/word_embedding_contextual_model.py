@@ -21,14 +21,14 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
   
   def get_word_tokens(self, word):
     res = self.tokenizer(word,return_tensors="pt")
-    print(res)
-    start_idx = 0 if self.use_cls else 1
-    map(res.values(), lambda x: x[None,0,start_idx:-1])
-    print(res)
     
-    # res["input_ids"] = res["input_ids"][None,0,start_idx:-1]
-    # res["token_type_ids"] = res["token_type_ids"][None,0,start_idx:-1]
-    # res["attention_mask"] = res["attention_mask"][None,0,start_idx:-1]
+    #  Rmoving CLS depending on parameter
+    start_idx = 0 if self.use_cls else 1
+    
+    
+    res["input_ids"] = res["input_ids"][None,0,start_idx:-1]
+    res["token_type_ids"] = res["token_type_ids"][None,0,start_idx:-1]
+    res["attention_mask"] = res["attention_mask"][None,0,start_idx:-1]
     return res
     
     
