@@ -39,10 +39,11 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
   def __getitem__(self, word):
     word_tokens = self.get_word_tokens(word)
     
-    res = self.wv(**word_tokens)["last_hidden_state"].detach().numpy()[0]
+    res = self.wv(**word_tokens)["last_hidden_state"].detach().numpy()
     
     # If use_cls is off then we aggregate
     if not self.use_cls:
-      return self.aggregation_method(res,axis=0)
+      return self.aggregation_method(res,axis=1)[0]
 
+    print(res[0].shape)
     return res[0]
