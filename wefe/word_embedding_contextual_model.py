@@ -23,7 +23,7 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
     print(res)
     res = self.tokenizer(word,return_tensors="pt")
     start_idx = 0 if self.use_cls else 1
-    res.values.map(lambda x: x[None,0,start_idx:-1)
+    res.values.map(lambda x: x[None,0,start_idx:-1])
     print(res)
     
     # res["input_ids"] = res["input_ids"][None,0,start_idx:-1]
