@@ -23,13 +23,16 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
   def get_word_tokens(self, word):
     res = self.tokenizer(word,return_tensors="pt")
     
-    #  Rmoving CLS depending on parameter
+     
+    #  Removing CLS depending on parameter
     start_idx = 0 if self.use_cls else 1
+
+    # Ignoring all the other vectors when use_cls is on
+    end_idx = 1 if self.use_cls else -1
     
-    
-    res["input_ids"] = res["input_ids"][None,0,start_idx:-1]
-    res["token_type_ids"] = res["token_type_ids"][None,0,start_idx:-1]
-    res["attention_mask"] = res["attention_mask"][None,0,start_idx:-1]
+    res["input_ids"] = res["input_ids"][None,0,start_idx:end_idx]
+    res["token_type_ids"] = res["token_type_ids"][None,0,start_idx:end_idx]
+    res["attention_mask"] = res["attention_mask"][None,0,start_idx:end_idx]
     return res
     
     
@@ -37,7 +40,10 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
   def __getitem__(self, word):
     word_tokens = self.get_word_tokens(word)
     
-    return self.aggregation_method(
-      self.wv(**word_tokens)["last_hidden_state"].detach().numpy(),
-      axis=1
-    )[0]
+    res = self.wv(**word_tokens)["last_hidden_state"].detach().numpy()
+    print(res.shape)
+    # If use_cls is off then we aggregate
+    if not self.use_cls:
+      res = self.aggregation_method(res,axis=1)
+
+    return res[0]
