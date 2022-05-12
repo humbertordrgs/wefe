@@ -18,7 +18,6 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
     self.name = name
     self.aggregation_method = self.aggregation_methods[aggregation]
     self.vocab_prefix = None
-    print(self.aggregation_method)
   
   def get_word_tokens(self, word):
     res = self.tokenizer(word,return_tensors="pt")
@@ -29,7 +28,7 @@ class WordEmbeddingContextualModel(WordEmbeddingBaseModel):
 
     # Ignoring all the other vectors when use_cls is on
     end_idx = 1 if self.use_cls else -1
-    
+    print(start_idx, end_idx)
     res["input_ids"] = res["input_ids"][None,0,start_idx:end_idx]
     res["token_type_ids"] = res["token_type_ids"][None,0,start_idx:end_idx]
     res["attention_mask"] = res["attention_mask"][None,0,start_idx:end_idx]
